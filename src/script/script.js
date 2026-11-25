@@ -2295,9 +2295,10 @@ function renderizarAgendaSemanal() {
       botao.type = "button";
       botao.className = `celulaAgendaSemanal ${agendamento ? "ocupado" : "disponivel"}`;
       if (agendamento) {
-        botao.textContent = `Ocupado\n${agendamento.horarioInicio}–${agendamento.horarioFim}`;
-        botao.title = `Ocupado por ${agendamento.professorResponsavel || "usuário"} — clique para ver detalhes`;
-        botao.setAttribute("aria-label", `${data}, ${periodo.numero}ª aula, ocupado`);
+        const nomeProfessor = String(agendamento.professorResponsavel || "").trim() || "Professor não informado";
+        botao.textContent = `Ocupado — ${nomeProfessor}`;
+        botao.title = `Ocupado por ${nomeProfessor} — clique para ver detalhes`;
+        botao.setAttribute("aria-label", `${data}, ${periodo.numero}ª aula, ocupado por ${nomeProfessor}`);
         botao.addEventListener("click", () => mostrarDetalhesOcupacaoAgenda(agendamento));
       } else {
         botao.textContent = "Disponível";
